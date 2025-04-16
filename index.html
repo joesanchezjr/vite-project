@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sandwiches + Coffee</title>
     <link rel="stylesheet" href="src/style.css" />
+    <script src="src/main.js"></script>
+    <script src="src/delayed.js" defer></script>
     <script
       src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"
       integrity="sha256-VGihm4idI0E1uqrWezWsiScB9F/jMosn7qs6pPSkeac="
@@ -19,112 +21,34 @@
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.module.min.js"
-      integrity="sha256-wRV9uwCNuRinhLKqypj45sQUU/IDqLwVwvIatfTF6Y8="
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      window.addEventListener("DOMContentLoaded", function () {
-        var delay = Math.random() * (5 - 3) + 3; // seconds
-
-        // Create and append the skeleton loader
-        var skeletonDiv = document.createElement("div");
-        skeletonDiv.style.width = "100%"; // Smaller width
-        skeletonDiv.style.height = "50px"; // Smaller height
-        skeletonDiv.style.background = "hsl(0, 0%, 90%)";
-        skeletonDiv.style.display = "flex";
-        skeletonDiv.style.alignItems = "center";
-        skeletonDiv.style.justifyContent = "center";
-
-        // Create spinner element
-        var spinner = document.createElement("div");
-        spinner.style.width = "30px";
-        spinner.style.height = "30px";
-        spinner.style.border = "4px solid hsl(0, 0%, 80%)";
-        spinner.style.borderTop = "4px solid hsl(0, 0%, 50%)";
-        spinner.style.borderRadius = "50%";
-        spinner.style.animation = "spin 1s linear infinite";
-
-        skeletonDiv.appendChild(spinner);
-        document.body.appendChild(skeletonDiv);
-
-        // Add spinner animation
-        var style = document.createElement("style");
-        style.textContent = `
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-        `;
-        document.head.appendChild(style);
-
-        setTimeout(function () {
-          // Replace skeleton loader with final content
-          skeletonDiv.style.height = "300px"; // Expand to full height
-          skeletonDiv.style.background = "rebeccapurple";
-          skeletonDiv.style.color = "white";
-          skeletonDiv.style.fontSize = "2rem"; // Increase font size
-          skeletonDiv.textContent = "📣";
-        }, delay * 1000);
-      });
+    <script type="module">
+      import three from "https://cdn.jsdelivr.net/npm/three@0.175.0/+esm";
     </script>
   </head>
-  <body>
-    <div style="color: hsl(0, 0%, 80%); text-align: center; margin-bottom: 1rem">nothing to see here ✌🏼</div>
-    <img src="/public/oleg-laptev-QRKJwE6yfJo-unsplash.jpg" style="max-width: 1280px; height: 300px" />
+  <body class="flex gap-y-8 flex-row justify-center">
+    <div
+      style="color: hsl(0, 0%, 80%); text-align: center; margin-bottom: 1rem"
+    >
+      nothing to see here ✌🏼
+    </div>
+    <div id="shift"></div>
+    <img
+      src="/public/oleg-laptev-QRKJwE6yfJo-unsplash.jpg"
+      style="max-width: 1280px; height: 300px"
+    />
+
     <button
       id="large-interaction-btn"
-      style="
-        display: block;
-        margin: 2rem auto;
-        padding: 1rem 2rem;
-        font-size: 1.5rem;
-        background-color: hsl(200, 70%, 50%);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-      "
+      class="cursor-pointer focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
     >
-      Trigger Delayed Interaction
+      Simulate Slow INP
     </button>
+
     <div
       id="interaction-target"
-      style="
-        width: 0;
-        height: 0;
-        overflow: hidden;
-        transition: all 0.5s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-      "
+      class="flex justify-center py-8 border rounded"
     >
-      🎉
+      Waiting For Interaction
     </div>
-    <script>
-      document.getElementById("large-interaction-btn").addEventListener("click", function () {
-        var target = document.getElementById("interaction-target");
-        var button = document.getElementById("large-interaction-btn");
-        var delay = Math.random() * (3 - 1) + 1; // Random delay between 1 and 3 seconds
-
-        setTimeout(function () {
-          if (target.style.width === "100%") {
-            target.style.width = "0";
-            target.style.height = "0";
-            target.style.marginTop = "0";
-            button.textContent = "Trigger Delayed Interaction";
-          } else {
-            target.style.width = "100%";
-            target.style.height = "300px";
-            target.style.background = "hsl(340, 70%, 50%)";
-            target.style.marginTop = "1rem";
-            button.textContent = "Hide Element";
-          }
-        }, delay * 1000);
-      });
-    </script>
   </body>
 </html>
