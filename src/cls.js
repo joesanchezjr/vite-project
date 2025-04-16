@@ -1,9 +1,11 @@
 import { getRandomDelay } from "./utils";
 
+import imageUrl from "../src/oleg-laptev-QRKJwE6yfJo-unsplash.jpg";
+
 setTimeout(() => {
   const container = document.getElementById("cls");
   const img = document.createElement("img");
-  img.src = "/assets/oleg-laptev-QRKJwE6yfJo-unsplash.jpg";
+  img.src = imageUrl;
   container.appendChild(img);
 
   const text = document.createElement("div");
